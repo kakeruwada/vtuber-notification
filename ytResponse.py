@@ -13,7 +13,7 @@ class ytResponse:
 
         unixnowtime=time()
         #現在のunixタイムを格納
-        unix1dayago=int(unixnowtime)-86400
+        unix1dayago=int(unixnowtime)-118800
         #一日前のunixタイムを格納
         RFC3339_1dp=datetime.datetime.fromtimestamp(unix1dayago)
         #unixタイムをRFC3339方式に変更
