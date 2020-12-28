@@ -1,1 +1,1 @@
-web: python vtubernotify.py
+web: python vtubernotify_2.py
