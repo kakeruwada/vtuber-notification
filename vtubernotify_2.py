@@ -33,7 +33,7 @@ listedRes = list(Response.items())
 #クエリを指定して検索結果を取得
 
 #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-for R in range(len(Res)):
+for R in range(len(listedRes)):
     item = listedRes[R]
     pResList = pprint.pformat(item)
     #辞書形式からリストに変更しpprintで見やすくする
