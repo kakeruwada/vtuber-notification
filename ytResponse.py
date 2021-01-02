@@ -1,13 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import sys
 from apiclient.discovery import build
 import json
 from time import time
 import datetime
 
-sys.path
 
 class ytResponse:
     def ytResponse(self,query):
