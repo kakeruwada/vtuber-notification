@@ -37,7 +37,7 @@ for R in range(len(listedRes)):
     item = listedRes[R]
     pResList = pprint.pformat(item)
     #辞書形式からリストに変更しpprintで見やすくする
-    DeResList = str(pResList).decode('string-escape')
+    DeResList = pResList
     #デコード処理
     try:
         line_bot_api.push_message('Uf0f5062854847968101f84a27657f739', TextSendMessage(text=DeResList))

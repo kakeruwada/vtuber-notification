@@ -37,6 +37,6 @@ class ytResponse:
         dic={}
 
         for sr in search_response.get("items", []):
-            dic[sr['snippet']['title'].encode('utf_8')] = 'https://www.youtube.com/watch?v='+sr['id']['videoId']
+            dic[sr['snippet']['title']] = 'https://www.youtube.com/watch?v='+sr['id']['videoId']
 
         return dic
