@@ -26,10 +26,9 @@ def callback():
 q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
 q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
 
-#qlist = [q1]
-#qlist.extend([q2, q1])
-Response = ytResponse.ytResponse().ytResponse(q1)
-listedRes = list(Response.items())
+Response1 = ytResponse.ytResponse().ytResponse(q1)
+Response2 = ytResponse.ytResponse().ytResponse(q2)
+listedRes = list(Response1.items())+list(Response2.items())
 #クエリを指定して検索結果を取得
 
 #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
