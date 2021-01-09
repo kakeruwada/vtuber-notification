@@ -25,7 +25,7 @@ class ytResponse:
           part='snippet',
           publishedAfter=Ztime,#昨日以降の動画を指定
           q=query,
-          maxResults=5,
+          maxResults=10,
           order='viewCount',
           type='video',
           ).execute()
