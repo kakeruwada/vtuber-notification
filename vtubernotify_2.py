@@ -37,7 +37,7 @@ def callback():
 
     return 'OK'
 
-#LINEアカウントがフォローされた時にメッセージを送信するメソッド
+#LINEアカウントがフォローされた時にメッセージを送信
 @handler.add(FollowEvent)
 def handle_follow(event):
     line_bot_api.reply_message(
@@ -62,7 +62,7 @@ q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
 q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
 #youtubeAPIに送信するクエリを設定
 
-#クエリに対する検索結果をLINEに送信するメソッド
+#クエリに対する検索結果をLINEに送信
 def sendYTresult():
     dt = datetime.datetime.now()
     if dt.hour < 12:
@@ -87,5 +87,4 @@ def sendYTresult():
            line_bot_api.push_message('Uf0f5062854847968101f84a27657f739', TextSendMessage(text="エラー"))
 
 if __name__ == "__main__":
-    port = int (os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
