@@ -84,3 +84,6 @@ def sendYTresult():
             line_bot_api.push_message('Uf0f5062854847968101f84a27657f739', TextSendMessage(text=DeResList))
         except LineBotApiError:
            line_bot_api.push_message('Uf0f5062854847968101f84a27657f739', TextSendMessage(text="エラー"))
+
+if __name__ == "__main__":
+    app.run()
