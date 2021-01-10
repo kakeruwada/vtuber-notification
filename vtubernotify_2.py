@@ -1,5 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+import os
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -14,11 +15,11 @@ import pprint
 from flask import Flask, request, abort
 import datetime
 
+app = Flask(__name__)
+
 channel_access_token = ('gdwFD3CEbW2keHoILCal0xC9nTEy4PdLfLEmqnai2w8N1x8Gcy24EhAfSFh7m8MMesD1/d7e+OmblqrazFVQiLbEwE55eBYcy64QW9n52CkfyUX4NFsl4t6AC4kRz4IEOdosSS/pAQtCI4Kq14rAHgdB04t89/1O/w1cDnyilFU=')
 line_bot_api = LineBotApi(channel_access_token)
 handler = WebhookHandler('2c9ceaf2583460f2a84b472daab233fa')
-
-app = Flask(__name__)
 
 #LINEAPIからのHTTPリクエストの署名を検証し、問題ない場合任意の関数を実行
 @app.route("/callback", methods=['POST'])
@@ -86,4 +87,5 @@ def sendYTresult():
            line_bot_api.push_message('Uf0f5062854847968101f84a27657f739', TextSendMessage(text="エラー"))
 
 if __name__ == "__main__":
-    app.run()
+    port = int (os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
