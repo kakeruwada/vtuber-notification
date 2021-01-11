@@ -69,9 +69,9 @@ def sendYTresult():
         DeResList = pResList
         #デコード処理
         try:
-            line_bot_api.push_message(to=profile.user_id, TextSendMessage(text=DeResList))
+            line_bot_api.push_message(profile.user_id, TextSendMessage(text=DeResList))
         except LineBotApiError:
-           line_bot_api.push_message(to=profile.user_id, TextSendMessage(text="エラー"))
+           line_bot_api.push_message(profile.user_id, TextSendMessage(text="エラー"))
 
 
 if __name__ == "__main__":
