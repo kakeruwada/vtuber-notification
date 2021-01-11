@@ -37,10 +37,10 @@ def callback():
 
     return 'OK'
 
+
 #LINEアカウントがフォローされた時にメッセージを送信
 @handler.add(FollowEvent)
 def handle_follow(event):
-    profile = line_bot_api.get_profile(event.source.user_id)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
@@ -48,6 +48,7 @@ def handle_follow(event):
 q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
 q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
 #youtubeAPIに送信するクエリを設定
+
 
 #クエリに対する検索結果をLINEに送信
 def sendYTresult():
@@ -57,7 +58,6 @@ def sendYTresult():
     else:
         Response = ytResponse.ytResponse().ytResponse(q2)
     #午前はホロライブ、午後はにじさんじの切り抜きを通知
-
     listedRes = list(Response.items())
     #クエリを指定して検索結果を取得
 
@@ -69,9 +69,9 @@ def sendYTresult():
         DeResList = pResList
         #デコード処理
         try:
-            line_bot_api.push_message(profile.user_id, TextSendMessage(text=DeResList))
+            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=DeResList))
         except LineBotApiError:
-           line_bot_api.push_message(profile.user_id, TextSendMessage(text="エラー"))
+           line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラー"))
 
 sendYTresult()
 
