@@ -43,8 +43,12 @@ def handle_follow(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！"))
-
-
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="URLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します"))
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text="LINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
 
 
 q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
