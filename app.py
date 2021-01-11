@@ -52,7 +52,7 @@ q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ
 #クエリに対する検索結果をLINEに送信
 def sendYTresult():
     dt = datetime.datetime.now()
-    if dt.hour < 12:
+    if dt.hour < 21: #JST時間で12:00以降か以前か判定（UTC時間への補正のため+9時間）
         Response = ytResponse.ytResponse().ytResponse(q1)
     else:
         Response = ytResponse.ytResponse().ytResponse(q2)
@@ -73,6 +73,7 @@ def sendYTresult():
         except LineBotApiError:
            line_bot_api.push_message(profile.user_id, TextSendMessage(text="エラー"))
 
+sendYTresult()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
