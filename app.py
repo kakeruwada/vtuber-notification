@@ -42,7 +42,7 @@ def callback():
 def handle_follow():
     body = request.get_data(as_text=True)
     line_bot_api.reply_message(
-         TextSendMessage(body["replyToken"],
+         TextSendMessage(body["events"][0]["replyToken"],
              text='過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！'
              ))
 
