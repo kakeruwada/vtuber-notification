@@ -63,7 +63,7 @@ q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ
 #クエリに対する検索結果をLINEに送信
 def sendYTresult():
     dt = datetime.datetime.now()
-    if dt.hour < 3: #JST時間で12:00以降か以前か判定（UTC時間への補正のため+9時間）
+    if dt.hour < 0: #JST時間で9:00以降か以前か判定（UTC時間への補正のため+9時間）
         Response = ytResponse.ytResponse().ytResponse(q1)
     else:
         Response = ytResponse.ytResponse().ytResponse(q2)
