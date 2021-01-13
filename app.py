@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+import sys
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -17,9 +18,18 @@ import datetime
 
 app = Flask(__name__)
 
-channel_access_token = ('gdwFD3CEbW2keHoILCal0xC9nTEy4PdLfLEmqnai2w8N1x8Gcy24EhAfSFh7m8MMesD1/d7e+OmblqrazFVQiLbEwE55eBYcy64QW9n52CkfyUX4NFsl4t6AC4kRz4IEOdosSS/pAQtCI4Kq14rAHgdB04t89/1O/w1cDnyilFU=')
+channel_access_token = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
+channel_secret = os.environ['YOUR_CHANNEL_SECRET']
+
+if channel_secret is None:
+    print('Specify LINE_CHANNEL_SECRET as environment variable.')
+    sys.exit(1)
+if channel_access_token is None:
+    print('Specify LINE_CHANNEL_ACCESS_TOKEN as environment variable.')
+    sys.exit(1)
+
 line_bot_api = LineBotApi(channel_access_token)
-handler = WebhookHandler('2c9ceaf2583460f2a84b472daab233fa')
+handler = WebhookHandler(channel_secret)
 
 #LINEAPIからのHTTPリクエストの署名を検証し、問題ない場合任意の関数を実行
 @app.route("/callback", methods=['POST'])
