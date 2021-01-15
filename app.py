@@ -55,6 +55,7 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
 
+
 q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
 q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
 #youtubeAPIに送信するクエリを設定
@@ -74,14 +75,12 @@ def sendYTresult():
     #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
     for R in range(len(listedRes)):
         item = listedRes[R]
-        pResList = pprint.pformat(item)
+        pResponse = pprint.pformat(item)
         #辞書形式からリストに変更しpprintで見やすくする
-        DeResList = pResList
-        #デコード処理
         try:
-            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=DeResList))
+            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pResponse))
         except LineBotApiError:
-           line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラー"))
+           line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
 
 sendYTresult()
 
