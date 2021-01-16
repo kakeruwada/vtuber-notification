@@ -18,12 +18,12 @@ class ytResponse:
         #一日前のunixタイムを格納
         RFC3339_1dp=datetime.datetime.fromtimestamp(unix1dayago)
         #unixタイムをRFC3339方式に変更
-        Ztime=RFC3339_1dp.isoformat("T")+"Z"
+        ztime=RFC3339_1dp.isoformat("T")+"Z"
         #RFC3339方式にZ（グリニッジ標準時）を入れ込む
 
         search_response = youtube.search().list(
           part='snippet',
-          publishedAfter=Ztime,#昨日以降の動画を指定
+          publishedAfter=ztime,#昨日以降の動画を指定
           q=query,
           maxResults=10,
           order='viewCount',
@@ -31,8 +31,6 @@ class ytResponse:
           ).execute()
         #youtubeAPIを使用し検索結果を条件付きで絞る
 
-        json_converted_response=json.dumps(search_response, sort_keys=True, indent=4)
-        #検索結果をJSON方式に変換
 
         dic={}
 
