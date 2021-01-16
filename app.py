@@ -55,11 +55,6 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
 
-#「トピック変更」とメッセージが来た際にクエリをyoutubeAPIにわたす渡すクエリを変更する
-@handler.add(MessageEvent, message = "トピック変更")
-def handle_message(event):
-    #ここにメッセージを受け取り、環境変数を再設定するosモジュール使用の関数を作成
-
 
 q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
 q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
@@ -69,7 +64,7 @@ q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ
 #クエリに対する検索結果をLINEに送信
 def send_yt_result():
     dt = datetime.datetime.now()
-    if dt.hour < 10: #JST時間で9:00以降か以前か判定（UTC時間への補正のため+9時間）
+    if dt.hour < 15: #JST時間で9:00以降か以前か判定（UTC時間への補正のため+9時間）
         Response = ytResponse.ytResponse().ytResponse(q1)
     else:
         Response = ytResponse.ytResponse().ytResponse(q2)
@@ -78,8 +73,8 @@ def send_yt_result():
     #クエリを指定して検索結果を取得
 
     #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-    for r in range(len(listedres)):
-        item = listedres[r]
+    for r in range(len(listed_res)):
+        item = listed_res[r]
         pp_response = pprint.pformat(item)
         #辞書形式からリストに変更しpprintで見やすくする
         try:

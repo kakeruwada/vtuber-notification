@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from apiclient.discovery import build
-import json
 from time import time
 import datetime
 
