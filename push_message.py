@@ -30,11 +30,13 @@ query2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさ�
 #クエリに対する検索結果をLINEに送信
 def send_yt_result(q1,q2):
     dt = datetime.datetime.now()
-    if dt.hour < 15: #JST時間で9:00以降か以前か判定（UTC時間への補正のため+9時間）
+    if dt.hour < 12:
         Response = ytResponse.ytResponse().ytResponse(q1)
+        #JST時間で9:00~21:00はq2の検索結果
     else:
         Response = ytResponse.ytResponse().ytResponse(q2)
-    #午前はホロライブ、午後はにじさんじの切り抜きを通知
+        #JST時間で21:00~9:00はq2の検索結果
+
     listed_res = list(Response.items())
     #クエリを指定して検索結果を取得
 
