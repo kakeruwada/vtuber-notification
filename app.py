@@ -11,10 +11,7 @@ from linebot.exceptions import (
 from linebot.models import (
     FollowEvent, MessageEvent, TextMessage, TextSendMessage,
 )
-import ytResponse
-import pprint
 from flask import Flask, request, abort
-import datetime
 
 app = Flask(__name__)
 
@@ -55,34 +52,6 @@ def handle_follow(event):
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝9時（ホロライブ）と夕方18時（にじさんじ）に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
 
-
-q1 = 'ホロライブ切り抜き　OR　ホロライブ手描き'
-q2 = 'にじさんじ切り抜き OR にじさんじ手描き OR にじさんじ漫画'
-#youtubeAPIに送信するクエリを設定
-
-
-#クエリに対する検索結果をLINEに送信
-def send_yt_result():
-    dt = datetime.datetime.now()
-    if dt.hour < 15: #JST時間で9:00以降か以前か判定（UTC時間への補正のため+9時間）
-        Response = ytResponse.ytResponse().ytResponse(q1)
-    else:
-        Response = ytResponse.ytResponse().ytResponse(q2)
-    #午前はホロライブ、午後はにじさんじの切り抜きを通知
-    listed_res = list(Response.items())
-    #クエリを指定して検索結果を取得
-
-    #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-    for r in range(len(listed_res)):
-        item = listed_res[r]
-        pp_response = pprint.pformat(item)
-        #辞書形式からリストに変更しpprintで見やすくする
-        try:
-            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pp_response))
-        except LineBotApiError:
-           line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
-
-send_yt_result()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 5000)))
