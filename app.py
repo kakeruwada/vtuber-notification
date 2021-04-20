@@ -54,7 +54,7 @@ def callback():
 
 #LINEアカウントがフォローされた時にメッセージを送信
 @handler.add(FollowEvent)
-def handle_follow(, event):
+def handle_follow(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="過去一日の切り抜きをそれぞれ朝8時（にじさんじ）と朝10時（ホロライブ）に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）"))
