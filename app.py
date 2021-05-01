@@ -44,8 +44,7 @@ handler = WebhookHandler(channel_secret)
 
 def get_response_message(num,line_mess):
     sql_isert = '"INSERT INTO query.table VALUES('+ num +','+ line_mess +')"'
-    with conn.cursor(cursor_factory=DictCursor) as cur:
-        cur.execute(sql_isert)
+    cur.execute(sql_isert)
 
 #--LINEメッセージ系
 
@@ -58,15 +57,16 @@ def handle_message(event):
         srch_wrd = splt[1]
 
         with psycopg2.connect(database_url) as conn:
-            sql = """
-            CREATE TABLE IF NOT EXISTS query.table (
-                id INTEGER,
-                name VARCHAR(20)
-            );
-            """
-            conn.execute(sql)
+            with conn.cursor() as cur:
+                sql = """
+                CREATE TABLE IF NOT EXISTS query.table (
+                    id INTEGER,
+                    name VARCHAR(20)
+                );
+                """
+                cur.execute(sql)
 
-            get_response_message(1,srch_wrd)
+                get_response_message(1,srch_wrd)
 
 
         line_bot_api.reply_message(
