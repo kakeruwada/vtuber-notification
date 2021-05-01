@@ -40,14 +40,7 @@ handler = WebhookHandler(channel_secret)
 
 #--データベース系の関数
 
-def create_ifnotexist():
-    sql = """
-    CREATE TABLE IF NOT EXISTS query.table (
-        id INTEGER,
-        name VARCHAR(20)
-    );
-    """
-    return conn.execute(sql)
+#def create_ifnotexist():
 
 def get_response_message(num,line_mess):
     sql_isert = '"INSERT INTO query.table VALUES('+ num +','+ line_mess +')"'
@@ -65,7 +58,14 @@ def handle_message(event):
         srch_wrd = splt[1]
 
         with psycopg2.connect(database_url) as conn:
-            create_ifnotexist()
+            sql = """
+            CREATE TABLE IF NOT EXISTS query.table (
+                id INTEGER,
+                name VARCHAR(20)
+            );
+            """
+            conn.execute(sql)
+
             get_response_message(1,srch_wrd)
 
 
