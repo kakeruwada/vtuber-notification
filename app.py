@@ -82,8 +82,16 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
         with psycopg2.connect(database_url) as conn:
-            create_ifnotexist()
-            get_response_message(2,srch_wrd)
+            with conn.cursor() as cur:
+                sql = """
+                CREATE TABLE IF NOT EXISTS query.table (
+                    id INTEGER,
+                    name VARCHAR(20)
+                );
+                """
+                cur.execute(sql)
+
+                get_response_message(2,srch_wrd)
 
     else:
         line_bot_api.reply_message(
