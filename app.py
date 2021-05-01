@@ -77,14 +77,13 @@ def handle_message(event):
         splt = line_mssg.split(":")
         srch_wrd = splt[1]
 
+        line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text= srch_wrd + "を登録したよ！"))
+
         with psycopg2.connect(database_url) as conn:
             create_ifnotexist()
             get_response_message(2,srch_wrd)
-
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
     else:
         line_bot_api.reply_message(
