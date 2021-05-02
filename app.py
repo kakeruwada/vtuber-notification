@@ -43,7 +43,7 @@ handler = WebhookHandler(channel_secret)
 #def create_ifnotexist():
 
 def get_response_message(num,line_mess):
-    sql_isert = '"INSERT INTO query_table VALUES('+ num +','+ line_mess +')"'
+    sql_isert = '"INSERT INTO query_table VALUES('+ str(num) +','+ line_mess +')"'
     cur.execute(sql_isert)
 
 #--LINEメッセージ系
