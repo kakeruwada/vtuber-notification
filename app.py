@@ -43,8 +43,9 @@ handler = WebhookHandler(channel_secret)
 #def create_ifnotexist():
 
 def get_response_message(num,line_mess):
-    sql_isert = '"INSERT INTO query_table VALUES('+ str(num) +','+ line_mess +')"'
-    cur.execute(sql_isert)
+    with conn.cursor() as cur:
+        sql_isert = '"INSERT INTO query_table VALUES('+ str(num) +','+ line_mess +')"'
+        cur.execute(sql_isert)
 
 #--LINEメッセージ系
 
@@ -61,16 +62,15 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
         with psycopg2.connect(database_url) as conn:
-            with conn.cursor() as cur:
-                sql = """
-                CREATE TABLE IF NOT EXISTS query_table (
-                    id INTEGER,
-                    name VARCHAR(20)
-                );
-                """
-                cur.execute(sql)
+            sql = """
+            CREATE TABLE IF NOT EXISTS query_table (
+                id INTEGER,
+                name VARCHAR(20)
+            );
+            """
+            cur.execute(sql)
 
-                get_response_message(1,srch_wrd)
+            get_response_message(1,srch_wrd)
 
 
     elif "登録2" in line_mssg:
@@ -82,16 +82,15 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
         with psycopg2.connect(database_url) as conn:
-            with conn.cursor() as cur:
-                sql = """
-                CREATE TABLE IF NOT EXISTS query_table (
-                    id INTEGER,
-                    name VARCHAR(20)
-                );
-                """
-                cur.execute(sql)
+            sql = """
+            CREATE TABLE IF NOT EXISTS query_table (
+                id INTEGER,
+                name VARCHAR(20)
+            );
+            """
+            cur.execute(sql)
 
-                get_response_message(2,srch_wrd)
+            get_response_message(2,srch_wrd)
 
     else:
         line_bot_api.reply_message(
