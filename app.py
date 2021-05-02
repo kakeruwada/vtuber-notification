@@ -127,7 +127,7 @@ def handle_follow(event):
 
     #クエリに対する検索結果をLINEに送信
 def send_yt_result():
-    with get_connection() as conn:
+    with psycopg2.connect(database_url) as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
             q1 = cur.execute("SELECT value FROM query.table WHERE id = 1")
             q2 = cur.execute("SELECT value FROM query.table WHERE id = 2")
