@@ -45,9 +45,9 @@ def get_response_message(num,line_mess):
         with conn.cursor() as cur:
             sql = """
             CREATE TABLE IF NOT EXISTS query_table (
-                PRIMARY KEY (id),
-                name VARCHAR(20)
-            );
+                id int,
+                name text
+            )
             """
             sql_isert = "INSERT INTO query_table(id, name) VALUES({}, {}) ON CONFLICT (id) DO UPDATE SET name = '{}'".format("id", "name", line_mess)
 
