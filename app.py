@@ -55,11 +55,11 @@ def get_response_message(num,line_mess):
                 name
                 )
             VALUES(
-                """+ str(num) +""",
-                """+ str(line_mess) +"""
+                """+ num +""",
+                """+ line_mess +"""
                 )
             ON CONFLICT (id) DO UPDATE
-                SET name = """+ str(line_mess) +"""
+                SET name = """+ line_mess +"""
                     ;
             """
 
