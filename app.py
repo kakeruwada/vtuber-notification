@@ -54,7 +54,7 @@ def get_response_message(num,line_mess):
 
             cur.execute(sql)#if not条件付きでテーブルを作る
 
-            index = cur.execute("SELECT id FROM SomeTable")
+            index = cur.execute("SELECT id FROM query_table")
 
             if str(num) in index:
                 cur.execute(sql_update)
