@@ -63,7 +63,7 @@ def handle_message(event):
         with psycopg2.connect(database_url) as conn:
             with conn.cursor() as cur:
                 sql = """
-                CREATE TABLE IF NOT EXISTS query.table (
+                CREATE TABLE IF NOT EXISTS query_table (
                     id INTEGER,
                     name VARCHAR(20)
                 );
@@ -84,7 +84,7 @@ def handle_message(event):
         with psycopg2.connect(database_url) as conn:
             with conn.cursor() as cur:
                 sql = """
-                CREATE TABLE IF NOT EXISTS query.table (
+                CREATE TABLE IF NOT EXISTS query_table (
                     id INTEGER,
                     name VARCHAR(20)
                 );
