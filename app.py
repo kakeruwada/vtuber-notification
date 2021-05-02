@@ -49,7 +49,7 @@ def get_response_message(num,line_mess):
                 name VARCHAR(20)
             );
             """
-            sql_isert = '"INSERT INTO query_table VALUES('+ str(num) +','+ line_mess +') ON DUPLICATE KEY UPDATE(name = '+ line_mess +')"'
+            sql_isert = '"INSERT INTO query_table(id, name) VALUES('+ str(num) +','+ line_mess +') ON DUPLICATE KEY UPDATE(name = '+ line_mess +')"'
 
             sql_update = '"UPDATE query_table SET name='+ line_mess +' WHERE id='+ str(num) +'"'
 
