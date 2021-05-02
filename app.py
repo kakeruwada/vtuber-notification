@@ -82,7 +82,7 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
 
-        get_response_message(1,srch_wrd)
+        get_response_message(srch_wrd,1)
 
 
     elif "登録2" in line_mssg:
