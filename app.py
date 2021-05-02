@@ -58,9 +58,8 @@ def get_response_message(num,line_mess):
                 """+ str(num) +""",
                 """+ line_mess +"""
                 )
-            ON DUPLICATE KEY
-            UPDATE
-                    name = """+ line_mess +"""
+            ON CONFLICT (id) DO UPDATE
+                SET name = """+ line_mess +"""
                     ;
             """
 
