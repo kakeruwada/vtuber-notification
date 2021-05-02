@@ -49,13 +49,7 @@ def get_response_message(num,line_mess):
                 name VARCHAR(20)
             );
             """
-            sql_isert = """
-            INSERT INTO query_table
-             VALUES(
-                """+ str(num) +""",
-                """+ line_mess +"""
-                );
-            """
+            sql_isert = "INSERT INTO query_table(id, name) VALUES({}, {}) ON CONFLICT (id) DO UPDATE SET name = '{}'".format(id, name, line_mess)
 
             cur.execute(sql)#if not条件付きでテーブルを作る
 
