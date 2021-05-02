@@ -63,8 +63,6 @@ def get_response_message(num,line_mess):
                     ;
             """
 
-            cur.execute(sql)#if not条件付きでテーブルを作る
-
             cur.execute(sql_isert)#指定した条件をテーブルに登録
 
 #--LINEメッセージ系
