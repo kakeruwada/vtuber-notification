@@ -45,7 +45,7 @@ def get_response_message(num,line_mess):
         with conn.cursor() as cur:
             sql = """
             CREATE TABLE IF NOT EXISTS query_table (
-                id INTEGER,
+                PRIMARY KEY (id),
                 name VARCHAR(20)
             );
             """
