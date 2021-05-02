@@ -42,7 +42,7 @@ handler = WebhookHandler(channel_secret)
 
 def get_response_message(num,line_mess):
     with psycopg2.connect(database_url) as conn:
-        with conn.cursor(cursor_factory=DictCursor) as cur:
+        with conn.cursor() as cur:
             sql = """
             CREATE TABLE IF NOT EXISTS query_table (
                 id INTEGER,
