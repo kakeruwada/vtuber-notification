@@ -55,7 +55,7 @@ def get_response_message(num,line_mess):
                 name
                 )
             VALUES(
-                """+ num +""",
+                """+ str(num) +""",
                 """+ line_mess +"""
                 )
             ON CONFLICT (id) DO UPDATE
@@ -82,7 +82,7 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
 
-        get_response_message(srch_wrd,1)
+        get_response_message(1,srch_wrd)
 
 
     elif "登録2" in line_mssg:
