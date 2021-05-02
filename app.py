@@ -56,12 +56,14 @@ def get_response_message(num,line_mess):
                 )
             VALUES(
                 """+ str(num) +""",
-                """+ line_mess +"""
+                """+ str(line_mess) +"""
                 )
             ON CONFLICT (id) DO UPDATE
-                SET name = """+ line_mess +"""
+                SET name = """+ str(line_mess) +"""
                     ;
             """
+
+            cur.execute(sql)#if not条件付きでテーブルを作る
 
             cur.execute(sql_isert)#指定した条件をテーブルに登録
 
