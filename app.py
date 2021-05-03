@@ -119,34 +119,32 @@ def handle_follow(event):
 
     #クエリに対する検索結果をLINEに送信
 def send_yt_result():
-    with psycopg2.connect(database_url) as conn:
-        with conn.cursor(cursor_factory=DictCursor) as cur:
-            rows = get_response_message()
+    rows = get_response_message()
 
-            r = rows[0]
+    r = rows[0]
 
-            dt = datetime.datetime.now()
-            if dt.hour < 12 and q1 != []:
-                Response = ytResponse.ytResponse().ytResponse(r[0])
-                #JST時間で9:00~21:00はq2の検索結果
-            elif q2 != []:
-                Response = ytResponse.ytResponse().ytResponse(r[1])
-                #JST時間で21:00~9:00はq2の検索結果
-            else:
-                sys.exit()
+    dt = datetime.datetime.now()
+    if dt.hour < 12 and q1 != []:
+        Response = ytResponse.ytResponse().ytResponse(r[0])
+        #JST時間で9:00~21:00はq2の検索結果
+    elif q2 != []:
+        Response = ytResponse.ytResponse().ytResponse(r[1])
+        #JST時間で21:00~9:00はq2の検索結果
+    else:
+        sys.exit()
 
-            listed_res = list(Response.items())
-            #クエリを指定して検索結果を取得
+    listed_res = list(Response.items())
+    #クエリを指定して検索結果を取得
 
-            #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-            for r in range(len(listed_res)):
-                item = listed_res[r]
-                pp_response = pprint.pformat(item)
-                #辞書形式からリストに変更しpprintで見やすくする
-                try:
-                    line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=str(type(q1))))
-                except LineBotApiError:
-                    line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
+    #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
+    for r in range(len(listed_res)):
+        item = listed_res[r]
+        pp_response = pprint.pformat(item)
+        #辞書形式からリストに変更しpprintで見やすくする
+        try:
+            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=str(type(q1))))
+        except LineBotApiError:
+            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
 
 
 if __name__ == "__main__":
