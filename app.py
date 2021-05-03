@@ -124,14 +124,12 @@ def send_yt_result():
     r = rows[0]
 
     dt = datetime.datetime.now()
-    if dt.hour < 12 and q1 != []:
+    if dt.hour < 12:
         Response = ytResponse.ytResponse().ytResponse(r[0])
         #JST時間で9:00~21:00はq2の検索結果
-    elif q2 != []:
+    else:
         Response = ytResponse.ytResponse().ytResponse(r[1])
         #JST時間で21:00~9:00はq2の検索結果
-    else:
-        sys.exit()
 
     listed_res = list(Response.items())
     #クエリを指定して検索結果を取得
