@@ -43,8 +43,8 @@ handler = WebhookHandler(channel_secret)
 def get_response_message(num,line_mess):
     with psycopg2.connect(database_url) as conn:
         with conn.cursor() as cur:
-            sql = "CREATE TABLE IF NOT EXISTS querytable (id int,name text, UNIQUE (ID))"
-            sql_isert = "INSERT INTO querytable(id, name) VALUES({}, {}) ON CONFLICT (id) DO UPDATE SET name = '{}'".format(str(num), line_mess, line_mess)
+            sql = "CREATE TABLE IF NOT EXISTS query_table (id int,name text, UNIQUE (ID))"
+            sql_isert = "INSERT INTO query_table(id, name) VALUES({}, '{}') ON CONFLICT (id) DO UPDATE SET name = '{}'".format(str(num), line_mess, line_mess)
 
             cur.execute(sql)#if not条件付きでテーブルを作る
 
@@ -114,8 +114,8 @@ def handle_follow(event):
 def send_yt_result():
     with psycopg2.connect(database_url) as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            q1 = cur.execute("SELECT value FROM querytable WHERE id = 1")
-            q2 = cur.execute("SELECT value FROM querytable WHERE id = 2")
+            q1 = cur.execute("SELECT value FROM query_table WHERE id = 1")
+            q2 = cur.execute("SELECT value FROM query_table WHERE id = 2")
             dt = datetime.datetime.now()
             if dt.hour < 12 and q1 != null:
                 Response = ytResponse.ytResponse().ytResponse(q1)
