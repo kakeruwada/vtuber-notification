@@ -40,7 +40,7 @@ handler = WebhookHandler(channel_secret)
 
 #--データベース系の関数
 
-def get_response_message(num,line_mess):
+def insert_message(num,line_mess):
     with psycopg2.connect(database_url) as conn:
         with conn.cursor() as cur:
             sql = "CREATE TABLE IF NOT EXISTS query_table (id int,name text, UNIQUE (id))"
@@ -49,6 +49,13 @@ def get_response_message(num,line_mess):
             cur.execute(sql)#if not条件付きでテーブルを作る
 
             cur.execute(sql_isert)#指定した条件をテーブルに登録
+
+def get_response_message():
+    with get_connection() as conn:
+        with conn.cursor(cursor_factory=DictCursor) as cur:
+            cur.execute("SELECT name FROM query_table)
+            rows = cur.fetchall()
+            return rows
 
 #--LINEメッセージ系
 
@@ -65,7 +72,7 @@ def handle_message(event):
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
 
-        get_response_message(1,srch_wrd)
+        insert_message(1,srch_wrd)
 
 
     elif "登録2" in line_mssg:
@@ -76,7 +83,7 @@ def handle_message(event):
         event.reply_token,
         TextSendMessage(text= srch_wrd + "を登録したよ！"))
 
-        get_response_message(2,srch_wrd)
+        insert_message(2,srch_wrd)
 
     else:
         line_bot_api.reply_message(
@@ -114,14 +121,16 @@ def handle_follow(event):
 def send_yt_result():
     with psycopg2.connect(database_url) as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            q1 = cur.execute("SELECT name FROM query_table WHERE id = 1")
-            q2 = cur.execute("SELECT name FROM query_table WHERE id = 2")
+            rows = get_response_message()
+
+            r = rows[0]
+
             dt = datetime.datetime.now()
             if dt.hour < 12 and q1 != []:
-                Response = ytResponse.ytResponse().ytResponse(str(q1))
+                Response = ytResponse.ytResponse().ytResponse(r[0])
                 #JST時間で9:00~21:00はq2の検索結果
             elif q2 != []:
-                Response = ytResponse.ytResponse().ytResponse(str(q2))
+                Response = ytResponse.ytResponse().ytResponse(r[1])
                 #JST時間で21:00~9:00はq2の検索結果
             else:
                 sys.exit()
