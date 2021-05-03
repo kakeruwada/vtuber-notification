@@ -22,6 +22,8 @@ from psycopg2.extras import DictCursor
 
 #--環境変数系
 
+
+
 app = Flask(__name__)
 
 channel_access_token = os.environ["YOUR_CHANNEL_ACCESS_TOKEN"]
@@ -50,12 +52,12 @@ def insert_message(num,line_mess):
 
             cur.execute(sql_isert)#指定した条件をテーブルに登録
 
-def get_response_message():
+def get_response_message(number):
     with psycopg2.connect(database_url) as conn:
-        with conn.cursor(cursor_factory=DictCursor) as cur:
-            cur.execute("SELECT name FROM query_table")
-            rows = cur.fetchall()
-            return rows
+        with conn.cursor() as cur:
+            w = cur.execute("SELECT name FROM query_table WHERE id = {}".format(number))
+            return w
+
 
 #--LINEメッセージ系
 
@@ -114,21 +116,18 @@ def handle_follow(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="過去一日の動画をそれぞれ朝8時と朝10時に10件ずつ送ります！\n-------------\nURLタップでアプリ内ののブラウザに遷移、サムネイルタップでLINEアプリ内のプレイヤーで視聴します\n-------------\nLINEの「設定」より「LINE Labs」、「リンクをSafariで開く」をオンにすると、URLタップ時にSafariまたはYoutubeアプリで視聴できます（iOSのみ）\n-------------\n検索ワードに設定したいワードは「登録:〇〇（任意のワード）」のフォーマットで登録:は半角　"))
+#----
 
-
-
+#----
     #クエリに対する検索結果をLINEに送信
 def send_yt_result():
-    rows = get_response_message()
-
-    r = rows[0]
-
     dt = datetime.datetime.now()
+
     if dt.hour < 12:
-        Response = ytResponse.ytResponse().ytResponse(r[0])
+        Response = ytResponse.ytResponse().ytResponse(get_response_message(1))
         #JST時間で9:00~21:00はq2の検索結果
     else:
-        Response = ytResponse.ytResponse().ytResponse(r[1])
+        Response = ytResponse.ytResponse().ytResponse(get_response_message(2))
         #JST時間で21:00~9:00はq2の検索結果
 
     listed_res = list(Response.items())
