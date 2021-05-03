@@ -43,8 +43,8 @@ handler = WebhookHandler(channel_secret)
 def get_response_message(num,line_mess):
     with psycopg2.connect(database_url) as conn:
         with conn.cursor() as cur:
-            sql = "CREATE TABLE IF NOT EXISTS query_table (id int,name text, UNIQUE (ID))"
-            sql_isert = "INSERT INTO query_table(id, name) VALUES({}, '{}') ON CONFLICT (id) DO UPDATE SET name = '{}'".format(str(num), line_mess, line_mess)
+            sql = "CREATE TABLE IF NOT EXISTS query_table (id int,name text, UNIQUE (id))"
+            sql_isert = "INSERT INTO query_table(id, name) VALUES('{}', '{}') ON CONFLICT (id) DO UPDATE SET name = '{}'".format(str(num), line_mess, line_mess)
 
             cur.execute(sql)#if not条件付きでテーブルを作る
 
