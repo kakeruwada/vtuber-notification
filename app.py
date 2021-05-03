@@ -135,7 +135,7 @@ def send_yt_result():
                 pp_response = pprint.pformat(item)
                 #辞書形式からリストに変更しpprintで見やすくする
                 try:
-                    line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=type(q1)))
+                    line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=str(type(q1))))
                 except LineBotApiError:
                     line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
 
