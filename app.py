@@ -51,7 +51,7 @@ def insert_message(num,line_mess):
             cur.execute(sql_isert)#指定した条件をテーブルに登録
 
 def get_response_message():
-    with get_connection() as conn:
+    with psycopg2.connect(database_url) as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
             cur.execute("SELECT name FROM query_table")
             rows = cur.fetchall()
