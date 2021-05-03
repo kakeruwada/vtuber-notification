@@ -114,8 +114,8 @@ def handle_follow(event):
 def send_yt_result():
     with psycopg2.connect(database_url) as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            q1 = cur.execute("SELECT value FROM query_table WHERE id = 1")
-            q2 = cur.execute("SELECT value FROM query_table WHERE id = 2")
+            q1 = cur.execute("SELECT name FROM query_table WHERE id = 1")
+            q2 = cur.execute("SELECT name FROM query_table WHERE id = 2")
             dt = datetime.datetime.now()
             if dt.hour < 12 and q1 != null:
                 Response = ytResponse.ytResponse().ytResponse(q1)
