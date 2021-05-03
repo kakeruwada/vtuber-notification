@@ -53,7 +53,7 @@ def insert_message(num,line_mess):
 def get_response_message():
     with get_connection() as conn:
         with conn.cursor(cursor_factory=DictCursor) as cur:
-            cur.execute("SELECT name FROM query_table)
+            cur.execute("SELECT name FROM query_table")
             rows = cur.fetchall()
             return rows
 
