@@ -118,10 +118,10 @@ def send_yt_result():
             q2 = cur.execute("SELECT name FROM query_table WHERE id = 2")
             dt = datetime.datetime.now()
             if dt.hour < 12 and q1 != []:
-                Response = ytResponse.ytResponse().ytResponse(q1[0])
+                Response = ytResponse.ytResponse().ytResponse(str(q1))
                 #JST時間で9:00~21:00はq2の検索結果
             elif q2 != []:
-                Response = ytResponse.ytResponse().ytResponse(q2[0])
+                Response = ytResponse.ytResponse().ytResponse(str(q2))
                 #JST時間で21:00~9:00はq2の検索結果
             else:
                 sys.exit()
