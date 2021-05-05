@@ -56,9 +56,7 @@ def handle_message(event):
             pp_response = pprint.pformat(item)
             #辞書形式からリストに変更しpprintで見やすくする
             try:
-                line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text= pp_response ))
+                line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pp_response))
             except LineBotApiError:
                 line_bot_api.reply_message(
                 event.reply_token,
