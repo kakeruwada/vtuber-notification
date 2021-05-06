@@ -90,7 +90,7 @@ def callback():
 def handle_follow(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text="自分の好きなキーワードを送信する！\n↓\nそのキーワードで過去一日以内に投稿された動画のうち再生数TOP5の動画が送られてくるよ！\n\n【Tip】\nIOSの人は「設定」→「LINE Labs」→「リンクをデフォルトのブラウザで開く」をONにすると、送信された動画リンクタップでyoutubeアプリで視聴できるよ！"))
+        TextSendMessage(text="自分の好きなキーワードを送信してみてね！\n↓\nそのキーワードで過去一日以内に投稿された動画のうち再生数TOP5の動画が送られてくるよ！\n\n【Tip】\nIOSの人は「設定」→「LINE Labs」→「リンクをデフォルトのブラウザで開く」をONにすると、送信された動画リンクタップでyoutubeアプリで視聴できるよ！"))
 #----
 
 #----
