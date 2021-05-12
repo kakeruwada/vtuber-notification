@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
-from apiclient.discovery import build
+apiclient.discovery
+from apiclient import discovery
 from time import time
 import datetime
 
@@ -9,7 +9,7 @@ import datetime
 class ytResponse:
     def ytResponse(self,query):
         YOUTUBE_API_KEY = 'AIzaSyCx0b1EJjx4h70TfkJ4L6El9htNHGEx1j0'
-        youtube = build('youtube', 'v3' ,developerKey=YOUTUBE_API_KEY)
+        youtube = discovery.build('youtube', 'v3' ,developerKey=YOUTUBE_API_KEY)
 
         unixnowtime=time()
         #現在のunixタイムを格納
