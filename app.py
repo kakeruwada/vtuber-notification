@@ -18,7 +18,7 @@ import pprint
 import datetime
 
 
-#--環境変数系
+#--環境変数系--
 
 
 
