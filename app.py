@@ -39,11 +39,11 @@ handler = WebhookHandler(channel_secret)
 
 #--LINEメッセージ系
 
-
+#メッセージを貰った時に、動画検索結果をリプライ
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_mssg = event.message.text
-    if  type(line_mssg) == str :
+    if  type(line_mssg) == str : #メッセージがstr型だった場合、
 
         Response = ytResponse.ytResponse().ytResponse(line_mssg)
 
@@ -91,10 +91,13 @@ def handle_follow(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text="自分の好きなキーワードを送信してみてね！\n↓\nそのキーワードで過去一日以内に投稿された動画のうち再生数TOP5の動画が送られてくるよ！\n※時間を置くと動画送信に時間がかかる場合があるよ！\n\n【Tip】\nIOSの人は「設定」→「LINE Labs」→「リンクをデフォルトのブラウザで開く」をONにすると、送信された動画リンクタップでyoutubeアプリで視聴できるよ！"))
-#----
 
-#----
-    #クエリに対する検索結果をLINEに送信
+#----LINEメッセージ系終了
+
+
+#----使用しない関数（send_yt_result）
+    #クエリに対する検索結果を定期的にLINEに送信
+
 def send_yt_result(q1, q2):
     dt = datetime.datetime.now()
 

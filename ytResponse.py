@@ -1,6 +1,5 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-apiclient.discovery
 from apiclient import discovery
 from time import time
 import datetime
@@ -22,7 +21,7 @@ class ytResponse:
 
         search_response = youtube.search().list(
           part='snippet',
-          publishedAfter=ztime,#昨日以降の動画を指定
+          publishedAfter=ztime,#昨日以降に投稿された動画を指定
           q=query,
           maxResults=5,
           order='viewCount',
@@ -37,3 +36,4 @@ class ytResponse:
             dic[sr['snippet']['title']] = 'https://www.youtube.com/watch?v='+sr['id']['videoId']
 
         return dic
+        #取得した動画のタイトルとurlの辞書リスト
