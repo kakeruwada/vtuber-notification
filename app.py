@@ -95,7 +95,7 @@ def handle_follow(event):
 
 
 #----使用しない関数（send_yt_result）
-    #クエリに対する検索結果を定期的にLINEに送信
+#クエリに対する検索結果を定期的にLINEに送信する（herokuscheduler使用）
 
 def send_yt_result(q1, q2):
     dt = datetime.datetime.now()
