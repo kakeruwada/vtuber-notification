@@ -51,12 +51,11 @@ def handle_message(event):
         #クエリを指定して検索結果を取得
 
         #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-        for r in range(len(listed_res)):
-            item = listed_res[r]
-            pp_response = pprint.pformat(item)
-            #pprintで見やすくする
+        for r in listed_res:
+            item = r[1] + "\n" + r[2]
+
             try:
-                line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pp_response))
+                line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=item))
             except LineBotApiError:
                 line_bot_api.reply_message(
                 event.reply_token,
@@ -102,22 +101,23 @@ def send_yt_result(q1, q2):
     dt = datetime.datetime.now()
 
     if dt.hour < 12:
-        Response = ytapi.ytres().ytResponse()
+        Res = ytapi.ytres().ytResponse()
+        query = q1
         #JST時間で9:00~21:00はq2の検索結果
     else:
-        Response = ytapi.ytres().ytResponse()
+        Res = ytapi.ytres().ytResponse()
+        query = q2
         #JST時間で21:00~9:00はq2の検索結果
-
-    listed_res = list(Response.items())
+    response = Res.ytResponse(query)
+    listed_res = list(response.items())
     #クエリを指定して検索結果を取得
 
     #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
-    for r in range(len(listed_res)):
-        item = listed_res[r]
-        pp_response = pprint.pformat(item)
-        #辞書形式からリストに変更しpprintで見やすくする
+    for r in listed_res:
+        item = r[1] + "\n" + r[2]
+
         try:
-            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pp_response))
+            line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=item))
         except LineBotApiError:
             line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text="エラーが発生しました"))
 
