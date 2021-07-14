@@ -1,15 +1,15 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+
 from apiclient import discovery
 from time import time
 import datetime
 
 
-class ytResponse:
+class ytres:
     def ytResponse(self,query):
         YOUTUBE_API_KEY = 'AIzaSyCx0b1EJjx4h70TfkJ4L6El9htNHGEx1j0'
         youtube = discovery.build('youtube', 'v3' ,developerKey=YOUTUBE_API_KEY)
 
+        #24時間前の時間を取得しグリニッジ標準時に変更
         unixnowtime=time()
         #現在のunixタイムを格納
         unix1dayago=int(unixnowtime)-118800

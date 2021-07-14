@@ -1,5 +1,4 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
+
 import os
 import sys
 from linebot import (
@@ -13,7 +12,7 @@ from linebot.models import (
 )
 from flask import Flask, request, abort
 
-import ytResponse
+import ytapi
 import pprint
 import datetime
 
@@ -45,16 +44,17 @@ def handle_message(event):
     line_mssg = event.message.text
     if  type(line_mssg) == str : #メッセージがstr型だった場合、
 
-        Response = ytResponse.ytResponse().ytResponse(line_mssg)
+        Res = ytapi.ytres()
+        response = Res.ytResponse(line_mssg)
 
-        listed_res = list(Response.items())
+        listed_res = list(response.items())
         #クエリを指定して検索結果を取得
 
         #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
         for r in range(len(listed_res)):
             item = listed_res[r]
             pp_response = pprint.pformat(item)
-            #辞書形式からリストに変更しpprintで見やすくする
+            #pprintで見やすくする
             try:
                 line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=pp_response))
             except LineBotApiError:
@@ -65,7 +65,7 @@ def handle_message(event):
     else:
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text="にゃーん"))
+            TextSendMessage(text="好きなワードを送ってね"))
 
 
 #LINEAPIからのHTTPリクエストの署名を検証し、問題ない場合任意の関数を実行
@@ -102,10 +102,10 @@ def send_yt_result(q1, q2):
     dt = datetime.datetime.now()
 
     if dt.hour < 12:
-        Response = ytResponse.ytResponse().ytResponse()
+        Response = ytapi.ytres().ytResponse()
         #JST時間で9:00~21:00はq2の検索結果
     else:
-        Response = ytResponse.ytResponse().ytResponse()
+        Response = ytapi.ytres().ytResponse()
         #JST時間で21:00~9:00はq2の検索結果
 
     listed_res = list(Response.items())
