@@ -52,7 +52,7 @@ def handle_message(event):
 
         #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
         for r in listed_res:
-            item = r[1] + "\n" + r[2]
+            item = r[0] + "\n" + r[1]
 
             try:
                 line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=item))
@@ -114,7 +114,7 @@ def send_yt_result(q1, q2):
 
     #検索結果を1動画ずつ出力（LINEメッセージにて見やすくするため）
     for r in listed_res:
-        item = r[1] + "\n" + r[2]
+        item = r[0] + "\n" + r[1]
 
         try:
             line_bot_api.push_message("Uf0f5062854847968101f84a27657f739", TextSendMessage(text=item))
